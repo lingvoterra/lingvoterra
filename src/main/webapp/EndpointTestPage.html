@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Endpoint test page</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="http://localhost:8181//lingvoterra/resources/css/main.css">
+
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://localhost:8181/lingvoterra/resources/js/service/userService.js"></script>
+  <script src="http://localhost:8181/lingvoterra/resources/js/widgets/userWidget.js"></script>
+
+</head>
+<body>
+
+
+<h1>This is a heading</h1>
+<p>This is a paragraph.</p>
+
+	<!-- Create a user -->
+	Create a user:
+	<form>
+	  <input id = "login" name="login" value="ivan"><br>
+	  <input id = "pass" name="pass" value="2873@9%6hd1"><br>
+	  <input id = "email" name="email" value="ivan@gmail.com"><br>
+	  <button id = "sendRequestButton" name="button" value="Submit">Send</button>
+	</form>
+
+	<br>
+	
+	<!-- Find user -->
+	Find a user:
+    <form>
+	  Enter user ID: 
+	  <input id = "userId" name="userId" value="1"><br>
+  	  <button id = "findUserButton" name="button" value="Submit">Send</button>
+	</form>
+			
+		<!-- Widget for a user -->
+	<div id = "userInfo">User Info</div>
+		
+	<script>
+			
+		// Prevent the form from submitting
+		$( "form" ).submit(function( event ) {
+		  event.preventDefault();
+		});
+		
+		
+		/* Set click handlers. */
+		sendRequestButton.addEventListener("click", sendRequestToUserController, false);
+		findUserButton.addEventListener("click", findUserRequest, false);
+	</script>
+		
+	
+	<!-- Delete a user -->
+		
+	
+	<!-- Update a user -->
+	
+		
+
+</body>
+</html>
