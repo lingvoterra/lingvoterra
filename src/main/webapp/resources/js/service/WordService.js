@@ -8,7 +8,7 @@ WordService.prototype.getWordList = function(event){
 
    var body = '';
 
-   xhr.open("POST", '/goeaselystepbystep/getwordlist', true);
+   xhr.open("POST", '/lingvoterra/getwordlist', true);
    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 

@@ -12,7 +12,7 @@ function sendRequestToUserController(event)
               '&userPass=' + encodeURIComponent(pass) + 
               '&userEmail=' + encodeURIComponent(email);
 
-   xhr.open("POST", '/goeaselystepbystep/createuser', true)
+   xhr.open("POST", '/lingvoterra/createuser', true)
    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 
@@ -35,7 +35,7 @@ function findUserRequest(event)
 
    var body = 'userId=' + encodeURIComponent(userId);
 
-   xhr.open("POST", '/goeaselystepbystep/finduser', true)
+   xhr.open("POST", '/lingvoterra/finduser', true)
    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 
