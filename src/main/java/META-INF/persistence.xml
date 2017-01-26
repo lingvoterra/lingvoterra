@@ -5,6 +5,7 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 	
 		<class>com.lingvoterra.dao.users.User</class>
+		<class>com.lingvoterra.dao.words.Word</class>
 		
 		<properties>
 

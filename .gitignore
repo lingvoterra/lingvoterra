@@ -3,3 +3,9 @@ target
 .settings/*
 .project
 .classpath
+lib
+TemporaryBuild
+TestBinaries
+TestsResultFolder
+Logs
+BuildBinaries
