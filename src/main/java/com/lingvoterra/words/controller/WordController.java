@@ -1,11 +1,16 @@
-package com.lingvoterra.controller;
+package com.lingvoterra.words.controller;
+
+import java.io.IOException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,9 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lingvoterra.dao.users.UserDaoImpl;
-import com.lingvoterra.dao.words.WordDao;
-import com.lingvoterra.dao.words.WordDaoImpl;
-import com.lingvoterra.dao.words.WordList;
+import com.lingvoterra.words.dao.Word;
+import com.lingvoterra.words.dao.WordDao;
+import com.lingvoterra.words.dao.WordDaoImpl;
+import com.lingvoterra.words.dao.WordList;
+import com.lingvoterra.words.pagination.WordPaginationService;
 
 @Controller
 public class WordController {
@@ -23,7 +30,11 @@ public class WordController {
 
 	private EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("lingvoterra");
 	private EntityManager entitymanager = emfactory.createEntityManager();
+
 	private WordDao wordDao = new WordDaoImpl(entitymanager);
+
+	@Autowired
+	private WordPaginationService wordPaginationService;
 
 	@RequestMapping(value = "/getwordlist", method = RequestMethod.POST)
 	@ResponseBody
@@ -37,6 +48,29 @@ public class WordController {
 
 		log.info("The word list was formed.");
 		return jsonInString;
+	}
+
+	@RequestMapping(value = "/getwordlistpage", method = RequestMethod.POST)
+	@ResponseBody
+	public String getWordListPage(@RequestBody String wordListPageRequestData) throws IOException {
+		log.info("Getting a word list page...");
+
+		ObjectMapper mapper = new ObjectMapper();
+
+		WordListPageRequest wordListRequest = mapper.readValue(wordListPageRequestData, WordListPageRequest.class);
+
+		// TODO Call a service to get the words for the requested page
+		// ....
+
+		// Prepare response
+
+		List<Word> wordList = wordPaginationService.getWordPage(wordListRequest.getStartIndex(),
+				wordListRequest.getNumberOfElements());
+
+		WordListPageResponse wordListPageResponse = new WordListPageResponse(wordList);
+		log.info("The word list page was formed.");
+		return wordListPageResponse.toJson();
+
 	}
 
 }

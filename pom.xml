@@ -152,6 +152,13 @@
 		   <scope>system</scope>
 		   <systemPath>${env.JAVA_HOME}/lib/tools.jar</systemPath>
 		 </dependency>
+		 
+		 <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+		<dependency>
+		    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-all</artifactId>
+		    <version>1.9.5</version>
+		</dependency>
         
   </dependencies>
   <build>

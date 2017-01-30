@@ -1,4 +1,4 @@
-package com.lingvoterra.dao.words;
+package com.lingvoterra.words.dao;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

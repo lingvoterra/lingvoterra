@@ -1,8 +1,9 @@
-package com.lingvoterra.dao.words;
+package com.lingvoterra.words.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO See WordListPageResponse seems that dublicates.
 public class WordList {
 
 	public List<Word> wordList = new ArrayList<Word>();

@@ -1,11 +1,14 @@
-package com.lingvoterra.dao.words;
+package com.lingvoterra.words.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
+
+import com.lingvoterra.exception.BadDataException;
 
 public class WordDaoImpl implements WordDao {
 
@@ -50,25 +53,40 @@ public class WordDaoImpl implements WordDao {
 	@Override
 	public WordList getWordList() {
 
-		/*
-		 * // TODO Mock - replace by the database call
-		 * wordList.getWordList().add(new Word(1, "apple", "n", 1));
-		 * wordList.getWordList().add(new Word(2, "orange", "n", 2));
-		 */
-
 		WordList wordList = new WordList();
 		Query query = entitymanager.createNativeQuery("SELECT wordId, word, partOfSpeech FROM word", Word.class);
 		List<Word> list = query.getResultList();
-
-		log.info(list);
 
 		for (Object item : list) {
 			if (item instanceof Word) {
 				wordList.getWordList().add((Word) item);
 			}
 		}
-
 		return wordList;
-
 	}
+
+	@Override
+	public List<Word> getWordPage(int startIndex, int numberOfElements) {
+
+		if (startIndex <= 0 || numberOfElements <= 0) {
+			throw new BadDataException(
+					"Start index and number of elements for a pagination should be positive values!");
+		}
+
+		List<Word> wordList = new ArrayList<Word>();
+
+		Query query = entitymanager.createNativeQuery(
+				"SELECT wordId, word, partOfSpeech FROM word LIMIT " + startIndex + ", " + numberOfElements,
+				Word.class);
+
+		List<Word> list = query.getResultList();
+
+		for (Object item : list) {
+			if (item instanceof Word) {
+				wordList.add((Word) item);
+			}
+		}
+		return wordList;
+	}
+
 }
