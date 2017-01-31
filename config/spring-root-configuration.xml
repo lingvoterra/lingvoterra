@@ -26,20 +26,21 @@
     <mvc:default-servlet-handler />
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	
-	<bean id="entityManagerFactory" class="">
+	<!-- Create a factory for to produce entity manager -->
+	<bean id="entityManagerFactory" class="javax.persistence.Persistence"
+	factory-method="createEntityManagerFactory">
+		<constructor-arg>
+			<value>lingvoterra</value>
+		</constructor-arg>
+	</bean>
 	
+	<!-- Create a bean for EntityManager -->
+	<bean id="entityManager" factory-bean="entityManagerFactory" factory-method="createEntityManager" />
 	
-	<!-- The factory bean, which contains a method called
-     createInstance -->
-<bean id="myFactoryBean"
-      class="...">
-  ...
-</bean>
-<!-- The bean to be created via the factory bean -->
-<bean id="exampleBean"
-      factory-bean="myFactoryBean"
-      factory-method="createInstance"/>
-	
-	<bean id="wordDao" class="com.lingvoterra.words.dao.WordDaoImpl" />
+	<bean id="wordDao" class="com.lingvoterra.words.dao.WordDaoImpl">
+		<constructor-arg>
+			<ref bean="entityManager"/>
+		</constructor-arg>
+	</bean>
 	
 </beans>

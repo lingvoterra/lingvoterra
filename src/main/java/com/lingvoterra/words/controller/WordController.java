@@ -5,10 +5,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +20,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lingvoterra.dao.users.UserDaoImpl;
 import com.lingvoterra.words.dao.Word;
 import com.lingvoterra.words.dao.WordDao;
-import com.lingvoterra.words.dao.WordDaoImpl;
 import com.lingvoterra.words.dao.WordList;
 import com.lingvoterra.words.pagination.WordPaginationService;
 
@@ -28,10 +27,17 @@ import com.lingvoterra.words.pagination.WordPaginationService;
 public class WordController {
 	static Logger log = Logger.getLogger(UserDaoImpl.class.getName());
 
-	private EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("lingvoterra");
-	private EntityManager entitymanager = emfactory.createEntityManager();
+	@Autowired
+	@Qualifier("entityManagerFactory")
+	private EntityManagerFactory emfactory;
 
-	private WordDao wordDao = new WordDaoImpl(entitymanager);
+	@Autowired
+	@Qualifier("entityManager")
+	private EntityManager entitymanager;
+
+	@Autowired
+	@Qualifier("wordDao")
+	private WordDao wordDao;
 
 	@Autowired
 	private WordPaginationService wordPaginationService;

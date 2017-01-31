@@ -68,9 +68,11 @@ public class WordDaoImpl implements WordDao {
 	@Override
 	public List<Word> getWordPage(int startIndex, int numberOfElements) {
 
-		if (startIndex <= 0 || numberOfElements <= 0) {
+		if (startIndex < 0 || numberOfElements <= 0) {
+			throw new BadDataException("Bad data for word page. Start index should be >=0");
+		} else if (numberOfElements <= 0) {
 			throw new BadDataException(
-					"Start index and number of elements for a pagination should be positive values!");
+					"Bad data for word page. Number of elements for a pagination should be positive values!");
 		}
 
 		List<Word> wordList = new ArrayList<Word>();
