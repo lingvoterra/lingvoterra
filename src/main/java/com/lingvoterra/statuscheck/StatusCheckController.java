@@ -12,6 +12,7 @@ public class StatusCheckController {
 
 	@RequestMapping(value = "/v1/statuscheck", method = RequestMethod.GET)
 	public ResponseEntity<?> getStatus() {
+
 		try {
 			return new ResponseEntity<>(STATUS_IS_OK, HttpStatus.OK);
 		} catch (Exception ex) {
