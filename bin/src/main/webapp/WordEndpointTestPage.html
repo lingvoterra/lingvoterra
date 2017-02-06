@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Endpoint test page</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="http://localhost:8181//lingvoterra/resources/css/main.css">
+
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="http://localhost:8181/lingvoterra/resources/js/service/WordService.js"></script>
+  <script src="http://localhost:8181/lingvoterra/resources/js/widgets/Widget.js"></script>
+  <script src="http://localhost:8181/lingvoterra/resources/js/widgets/WordListWidget.js"></script>
+  
+   <script src="http://localhost:8181/lingvoterra/resources/js/model/Word.js"></script>
+   <script src="http://localhost:8181/lingvoterra/resources/js/model/WordList.js"></script>
+   
+   <script src="http://localhost:8181/lingvoterra/resources/js/utils/DataParser.js"></script>
+  
+</head>
+<body>
+
+
+<h1>Word list page</h1>
+
+	<!-- Word list -->
+	Word list:
+    <form>
+  	  <button id = "getWordListButton" name="button" value="Submit">Get word list</button>
+	</form>
+			
+		<!-- Widget for a user -->
+	<div id = "wordList">Word list will be displayed here</div>
+		
+	<script>
+			
+		// Prevent the form from submitting
+		$( "form" ).submit(function( event ) {
+		  event.preventDefault();
+		});
+		
+		var wordService = new WordService();
+		
+		/* Set click handlers. */
+		getWordListButton.addEventListener("click", wordService.getWordList(), false);
+	</script>
+
+</body>
+</html>

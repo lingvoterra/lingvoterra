@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="myApp">
 <head>
   <title>LingvoTerra</title>
   <meta charset="utf-8">
@@ -8,36 +8,37 @@
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
+  <script src="resources/js/angular/app.module.js"></script>
+  <script src="resources/js/angular/app.congfig.js"></script>
 </head>
 <body>
 
-<div class="jumbotron text-center">
-  <h2>Welcome to LingvoTerra!</h2>
-  <p>Resize this responsive page to see the effect!</p> 
-</div>
-  
-<div class="container">
-  <div class="row">
-    <div class="col-sm-4">
-      <h3>Menu</h3>
-      <p><a href = http://localhost:8181/lingvoterra/EndpointTestPage.html>
-             Test page for a user endpoint</a></p>
-      
-      <p><a href = http://localhost:8181/lingvoterra/WordEndpointTestPage.html>
-             Test page for a word endpoint</a></p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Main</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-    <div class="col-sm-4">
-      <h3>Info</h3>        
-      <p>News and updates</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
-    </div>
-  </div>
-</div>
+	<header>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">LingvoTerra</a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a ui-sref="home"> Home</a></li>
+                    <li><a ui-sref="about"> About</a></li>
+                    <li><a ui-sref="vocabulary">Vocabulary</a></li>
+                    <li><a ui-sref="exams">Exams</a></li>
+                    <li><a ui-sref="resources">Resources</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+    <div id="main">
+
+        <div ui-view></div>
+
+	</div>
+
+
 
 </body>
 </html>
