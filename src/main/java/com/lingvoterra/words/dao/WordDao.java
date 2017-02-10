@@ -18,7 +18,7 @@ public interface WordDao {
 
 	/**
 	 * Returns words per a page
-	 * 
+	 *
 	 * @param startIndex
 	 *            - index to start page
 	 * @param numberOfElements

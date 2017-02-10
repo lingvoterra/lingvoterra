@@ -1,4 +1,4 @@
-package com.lingvoterra.dao.users;
+package com.lingvoterra.users.dao;
 
 public interface UserDao {
 	public void create(User user);

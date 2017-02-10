@@ -1,4 +1,4 @@
-package com.lingvoterra.dao.users;
+package com.lingvoterra.users.dao;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -7,17 +7,18 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.lingvoterra.exception.BadDataException;
 
 public class WordDaoImpl implements WordDao {
 
 	static Logger log = Logger.getLogger(WordDaoImpl.class.getName());
-	private EntityManager entitymanager;
 
-	public WordDaoImpl(EntityManager entitymanager) {
-		this.entitymanager = entitymanager;
-	}
+	@Autowired
+	@Qualifier("entityManager")
+	private EntityManager entitymanager;
 
 	@Override
 	public void create(Word word) {
@@ -52,7 +53,6 @@ public class WordDaoImpl implements WordDao {
 
 	@Override
 	public WordList getWordList() {
-
 		WordList wordList = new WordList();
 		Query query = entitymanager.createNativeQuery("SELECT wordId, word, partOfSpeech FROM word", Word.class);
 		List<Word> list = query.getResultList();
@@ -67,7 +67,6 @@ public class WordDaoImpl implements WordDao {
 
 	@Override
 	public List<Word> getWordPage(int startIndex, int numberOfElements) {
-
 		if (startIndex < 0 || numberOfElements <= 0) {
 			throw new BadDataException("Bad data for word page. Start index should be >=0");
 		} else if (numberOfElements <= 0) {
@@ -90,5 +89,4 @@ public class WordDaoImpl implements WordDao {
 		}
 		return wordList;
 	}
-
 }

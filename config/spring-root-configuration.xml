@@ -41,10 +41,7 @@
 	<!-- Create a bean for EntityManager -->
 	<bean id="entityManager" factory-bean="entityManagerFactory" factory-method="createEntityManager" />
 	
-	<bean id="wordDao" class="com.lingvoterra.words.dao.WordDaoImpl">
-		<constructor-arg>
-			<ref bean="entityManager"/>
-		</constructor-arg>
-	</bean>
+	<bean id="wordDao" class="com.lingvoterra.words.dao.WordDaoImpl" />
+	<bean id="userDao" class="com.lingvoterra.users.dao.UserDaoImpl" />
 	
 </beans>

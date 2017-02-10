@@ -3,12 +3,8 @@ package com.lingvoterra.words.controller;
 import java.io.IOException;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,30 +13,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lingvoterra.dao.users.UserDaoImpl;
+import com.lingvoterra.users.dao.UserDaoImpl;
 import com.lingvoterra.words.dao.Word;
-import com.lingvoterra.words.dao.WordDao;
 import com.lingvoterra.words.dao.WordList;
-import com.lingvoterra.words.pagination.WordPaginationService;
+import com.lingvoterra.words.service.WordService;
 
 @Controller
 public class WordController {
 	static Logger log = Logger.getLogger(UserDaoImpl.class.getName());
 
 	@Autowired
-	@Qualifier("entityManagerFactory")
-	private EntityManagerFactory emfactory;
-
-	@Autowired
-	@Qualifier("entityManager")
-	private EntityManager entitymanager;
-
-	@Autowired
-	@Qualifier("wordDao")
-	private WordDao wordDao;
-
-	@Autowired
-	private WordPaginationService wordPaginationService;
+	private WordService wordService;
 
 	@RequestMapping(value = "/getwordlist", method = RequestMethod.POST)
 	@ResponseBody
@@ -48,7 +31,7 @@ public class WordController {
 		log.info("Getting a word list...");
 
 		ObjectMapper mapper = new ObjectMapper();
-		WordList wordList = wordDao.getWordList();
+		WordList wordList = wordService.getWordList();
 
 		String jsonInString = mapper.writeValueAsString(wordList.getWordList());
 
@@ -65,18 +48,11 @@ public class WordController {
 
 		WordListPageRequest wordListRequest = mapper.readValue(wordListPageRequestData, WordListPageRequest.class);
 
-		// TODO Call a service to get the words for the requested page
-		// ....
-
-		// Prepare response
-
-		List<Word> wordList = wordPaginationService.getWordPage(wordListRequest.getStartIndex(),
+		List<Word> wordList = wordService.getWordPage(wordListRequest.getStartIndex(),
 				wordListRequest.getNumberOfElements());
 
 		WordListPageResponse wordListPageResponse = new WordListPageResponse(wordList);
 		log.info("The word list page was formed.");
 		return wordListPageResponse.toJson();
-
 	}
-
 }

@@ -1,18 +1,18 @@
-package com.lingvoterra.dao.users;
+package com.lingvoterra.users.dao;
 
 import javax.persistence.EntityManager;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 public class UserDaoImpl implements UserDao {
-
 	/* Get actual class name to be printed on */
 	static Logger log = Logger.getLogger(UserDaoImpl.class.getName());
-	private EntityManager entitymanager;
 
-	public UserDaoImpl(EntityManager entitymanager) {
-		this.entitymanager = entitymanager;
-	}
+	@Autowired
+	@Qualifier("entityManager")
+	private EntityManager entitymanager;
 
 	@Override
 	public void create(User user) {
@@ -33,13 +33,11 @@ public class UserDaoImpl implements UserDao {
 		User user = entitymanager.find(User.class, userId);
 		entitymanager.getTransaction().commit();
 
-		log.info("A user has been found!");
 		return user;
 	}
 
 	@Override
 	public void delete(int userId) {
-
 		log.info("Starting to delete a user...");
 
 		entitymanager.getTransaction().begin();
@@ -52,7 +50,6 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void update(User newUser) {
-
 		log.info("Starting to update a user...");
 
 		entitymanager.getTransaction().begin();
