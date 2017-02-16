@@ -3,7 +3,6 @@ package com.lingvoterra.words.controller;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,14 +12,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lingvoterra.users.dao.UserDaoImpl;
+import com.lingvoterra.logging.AppLogger;
+import com.lingvoterra.logging.LogContext;
 import com.lingvoterra.words.dao.Word;
 import com.lingvoterra.words.dao.WordList;
 import com.lingvoterra.words.service.WordService;
 
 @Controller
 public class WordController {
-	static Logger log = Logger.getLogger(UserDaoImpl.class.getName());
+	static AppLogger log = LogContext.getLogger();
 
 	@Autowired
 	private WordService wordService;
